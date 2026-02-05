@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mamii's invitation 💜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        /* ====== BODY ====== */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(120deg, #7b2ff7, #ff5edf, #ffffff);
+            background-size: 300% 300%;
+            animation: colors 10s ease infinite;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        @keyframes colors {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #envelope {
+           width: 350px;           /* un peu plus grande */
+           height: 220px;
+           background: #fff;
+           border-radius: 15px;
+           position: relative;
+           cursor: pointer;
+           box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+           overflow: hidden;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           border: 3px solid #4b006e;
+         }
+
+                      /* Le cœur qui "ferme" l'enveloppe */
+        .heart {
+            position: absolute;
+            bottom: 30px;
+            font-size: 60px;
+            z-index: 3;
+        }
+        .flap-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 175px solid transparent;
+            border-right: 175px solid transparent;
+            border-top: 110px solid #0f0606; /* noir */
+            z-index: 1;  /* derrière le rabat */
+        }
+
+         /* Triangle violet → rabat qui s'ouvre */
+        .flap-front {
+            position: absolute;
+            top: 0;
+            left: 2.5px;
+            width: 0;
+            height: 0;
+            border-left: 172px solid transparent;   /* un peu plus petit */
+            border-right: 172px solid transparent;
+            border-top: 107px solid #f6f3fa;       /* couleur enveloppe */
+            z-index: 2;
+            transform-origin: top center;          /* pivot pour ouverture */
+            transition: transform 1s ease;
+            box-shadow: inset 0 0 0 2px black;     /* petit contour visible */
+        }
+        .noticee {
+            margin-top: 200px;
+            font-size: 34px;
+            color: #4b006e;
+        }
+        #notice {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #4b006e;
+        }
+
+        /* ====== EMOJIS FLOTANTS ====== */
+        .emojis {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .emojis span {
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.15;
+            animation: emo linear infinite;
+        }
+
+        @keyframes emo {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* ====== CONTENU PRINCIPAL ====== */
+        .container {
+            position: relative;
+            z-index: 1;
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+        }
+
+        .photo {
+            width: 400px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .texte {
+            width: 700px;
+            text-align: left;
+            font-size: 35px;
+            color: #4b006e;
+        }
+
+        button {
+            font-size: 24px;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yes {
+            background: #7b2ff7;
+            color: white;
+            box-shadow: 0 0 20px rgba(123,47,247,0.6);
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        #no {
+            position: fixed;
+            bottom: 50px;
+            left: calc(50% + 180px);
+            background: white;
+            color: black;
+            width: 150px;
+            height: 60px;
+            font-size: 20px;
+            text-align: center;
+            border-radius: 12px;
+            z-index: 2;
+            transition: 0.3s;
+        }
+
+        /* EMOJIS QUARTS */
+        .emojis span:nth-child(1)  { top: 8%;  left: 12%; animation-duration: 26s; }
+        .emojis span:nth-child(2)  { top: 22%; left: 28%; animation-duration: 31s; }
+        .emojis span:nth-child(3)  { top: 38%; left: 10%; animation-duration: 21s; }
+        .emojis span:nth-child(4)  { top: 10%; left: 68%; animation-duration: 34s; }
+        .emojis span:nth-child(5)  { top: 26%; left: 85%; animation-duration: 29s; }
+        .emojis span:nth-child(6)  { top: 42%; left: 60%; animation-duration: 33s; }
+        .emojis span:nth-child(7)  { top: 58%; left: 15%; animation-duration: 27s; }
+        .emojis span:nth-child(8)  { top: 74%; left: 32%; animation-duration: 30s; }
+        .emojis span:nth-child(9)  { top: 88%; left: 8%;  animation-duration: 22s; }
+        .emojis span:nth-child(10) { top: 60%; left: 70%; animation-duration: 36s; }
+        .emojis span:nth-child(11) { top: 78%; left: 88%; animation-duration: 28s; }
+        .emojis span:nth-child(12) { top: 90%; left: 55%; animation-duration: 32s; }
+    </style>
+</head>
+<body>
+    <!-- EMOJIS -->
+        <div class="emojis">
+            <span>💕</span><span>🌹</span><span>🎶</span>
+            <span>💕</span><span>🌹</span><span>🎶</span>
+            <span>💕</span><span>🌹</span><span>🎶</span>
+            <span>💕</span><span>🌹</span><span>🎶</span>
+        </div>
+
+    <!-- PAGE D'INTRO -->
+    <div id="intro">
+        <div id="envelope">
+    <p class="noticee"><strong>Cliquez pour ouvrir</strong></p>
+    <div class="heart">❤️</div>
+    <div class="flap-back"></div>    <!-- triangle noir fixe -->
+    <div class="flap-front"></div>   <!-- rabat qui s'ouvre -->
+</div>
+
+       <div id="notice">
+         Écouteurs recommandés 🎧
+       </div>
+    </div>
+
+
+    <!-- CONTENU PRINCIPAL (INVITATION) -->
+    <div id="mainContent" style="display:none;">
+        <!-- CONTENU -->
+        <div class="container">
+            <div class="photo" id="photo">
+                <img src="hamster.jpeg" alt="Photo initiale">
+            </div>
+            <div class="texte" id="texte">
+               <strong>
+                 Roses are red, violets are blue <br>
+                I wrote this poem thinking of you <br>
+                Imagining your smile while reading my text <br>
+                A feeling rises right in my chest <br>
+                You are pretty, a masterpiece of art <br>
+                These beautiful eyes got me from the start <br>
+                For one day, could I call you mine? <br>
+                I mean... will you be my Valentine? <br>
+               </strong>
+            </div>
+        </div>
+
+        <button id="yes">Oui❤️</button>
+        <button id="no">Non💔</button>
+
+        <!-- MUSIQUE -->
+        <audio id="music" loop>
+            <source src="beforeu.mpeg" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        // ====== PAGE D'INTRO ======
+        const envelope = document.getElementById("envelope");
+        const intro = document.getElementById("intro");
+        const mainContent = document.getElementById("mainContent");
+        const music = document.getElementById("music");
+const flapFront = document.querySelector(".flap-front");
+
+envelope.addEventListener("click", () => {
+    flapFront.style.transform = "rotateX(-180deg)";  // ouvre le rabat
+    envelope.style.transition = "transform 1s ease"; // si tu veux un effet sur le reste
+    setTimeout(() => {
+        intro.style.display = "none";
+        mainContent.style.display = "block";
+
+        // Lancer musique
+        music.currentTime = 0;
+        music.play();
+    }, 1000);
+});
+
+        // ====== INTERACTION BOUTONS ======
+        const yesBtn = document.getElementById("yes");
+        const noBtn = document.getElementById("no");
+        // 📌 Position initiale du bouton NON
+        const offsetX=1000;
+        const offsetY=575;
+        const initialNoPosition = {
+            left: noBtn.offsetLeft + offsetX,
+            top: noBtn.offsetTop + offsetY
+            };
+
+        const texteDiv = document.getElementById("texte");
+        const photoDiv = document.getElementById("photo");
+
+        let yesSize = 24;
+        let noCount = 0;
+        let fleeCount = 0;
+
+        const phrases = [
+            "Plizzyyy 😭😭😭",
+            "AAAAHHHHHHH Tu vas me faire faire un arrêt cardiaque \n\n\n t'es sur\?\?",
+            "Allez… dis oui tu le veux en quelle langue\?😔😔😔 \n\n¿Quieres ser mi Valentina?\n私のバレンタインになってくれますか\?\nХочешь быть моей Валентиной\?",
+            "OKA NAMA A 😥\! \n\n\n\n Mba ataovy izay hifanarahana",
+            "Ok c'est bon t'a plus le droit de dire non 🙄"
+        ];
+
+        const photos = [
+            "cry.jpeg",
+            "scared.jpeg",
+            "pray.jpeg",
+            "stooop.jpeg",
+            "stop.jpeg"
+        ];
+
+        // Bouton NON qui fuit
+        noBtn.addEventListener("mouseover", () => {
+
+    // 🏃‍♂️ 1ère et 2ème fuite → position aléatoire
+    if (fleeCount < 2) {
+        const maxX = window.innerWidth - noBtn.offsetWidth;
+        const maxY = window.innerHeight - noBtn.offsetHeight;
+
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+
+        yesSize += 8;
+        yesBtn.style.fontSize = yesSize + "px";
+        moveYesButton();
+
+        fleeCount++;
+    }
+
+    // 🧍‍♂️ 3ème fuite → retour à la position initiale
+    else if (fleeCount === 2) {
+        noBtn.style.left = initialNoPosition.left + "px";
+        noBtn.style.top = initialNoPosition.top + "px";
+
+        fleeCount++; // maintenant = 3
+    }
+
+    // 🚫 Après → plus de fuite
+});
+
+
+        // Si on clique sur NON
+noBtn.addEventListener("click", () => {
+    if (fleeCount >= 3) {
+
+        // Tant qu'il reste des phrases à afficher
+        if (noCount < phrases.length) {
+
+            // Affichage du texte et de la photo
+            texteDiv.innerText = phrases[noCount];
+            photoDiv.querySelector('img').src = photos[noCount];
+
+            // 🔥 MOMENT "ARRÊT CARDIAQUE" → changer le texte + agrandir le bouton
+            if (phrases[noCount].includes("arrêt cardiaque")) {
+                noBtn.innerText = "Toujours non💔";
+                noBtn.style.width = "240px";
+                noBtn.style.fontSize = "22px";
+                noBtn.style.padding = "10px 20px";
+            }
+
+            // 🛑 MOMENT "T'as plus le droit de dire non"
+            if (noCount === phrases.length - 1) {
+                noBtn.style.transition = "0.4s";
+                noBtn.style.opacity = "0";
+                noBtn.style.pointerEvents = "none";
+            }
+
+            noCount++;
+        }
+
+        // Grossir le bouton OUI à chaque clic sur NON
+        yesSize += 20;
+        yesBtn.style.fontSize = yesSize + "px";
+        moveYesButton();
+        repulseNoIfOverlap();
+    }
+});
+
+
+        yesBtn.addEventListener("click", () => {
+            document.querySelector(".container").style.display = "none";
+            yesBtn.style.display = "none";
+            noBtn.style.display = "none";
+
+            const thankYouDiv = document.createElement("div");
+            thankYouDiv.style.textAlign = "center";
+            thankYouDiv.style.marginTop = "50px";
+            thankYouDiv.innerHTML = `
+                <h1>Yuppiii\!\!\!\! 💕🥰</h1>
+                <h2>Merci d’avoir dit oui 💜 <br> voici des fleurs digne de tes beaux yeux 🌹</h2>
+                <div style="display:flex; justify-content:center; margin-top:30px;">
+                    <img src="bouquet.jpeg" alt="Photo de remerciement" style="width:500px; height:500px; border-radius:20px;">
+                </div>
+            `;
+            document.body.appendChild(thankYouDiv);
+        });
+        function moveYesButton() {
+    const baseBottom = 50;   // position de départ
+    const baseLeft = window.innerWidth / 2;
+
+    const shift = (yesSize - 24) * 1.2; // plus il grossit, plus il bouge
+
+    yesBtn.style.bottom = (baseBottom + shift * 0.4) + "px";
+    yesBtn.style.left = (baseLeft + shift) + "px";
+    yesBtn.style.transform = "translateX(-50%)";
+}
+
+
+        function repulseNoIfOverlap() {
+            const yesRect = yesBtn.getBoundingClientRect();
+            const noRect = noBtn.getBoundingClientRect();
+
+            const overlap =
+                yesRect.right > noRect.left &&
+                yesRect.left < noRect.right &&
+                yesRect.bottom > noRect.top &&
+                yesRect.top < noRect.bottom;
+
+            if (overlap) {
+                let offsetX = (Math.random() > 0.5 ? 1 : -1) * (noRect.width + 30);
+                let offsetY = (Math.random() > 0.5 ? 1 : -1) * (noRect.height + 30);
+
+                let newLeft = Math.min(Math.max(noRect.left + offsetX, 0), window.innerWidth - noRect.width);
+                let newTop = Math.min(Math.max(noRect.top + offsetY, 0), window.innerHeight - noRect.height);
+
+                noBtn.style.left = newLeft + "px";
+                noBtn.style.top = newTop + "px";
+            }
+        }
+    </script>
+</body>
+</html>
